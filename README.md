@@ -19,6 +19,8 @@ JEI Trades allows you to view trade information in JEI, including those of other
 It reads the information directly from the server, so it is based on the actual configuration used in the save.
 This makes the shown information very complete and JEI Trades able to show information for all mods that use the standard Minecraft trades system, without needing specific support for each mod.
 
+![Villager Trades screen in the game](https://cdn.modrinth.com/data/4SbUVStJ/images/d3dd45dac223a60b795e4e97fdda982e3c2d69c0.png)
+
 ## Mod Compatibility Requirements
 To be compatible with JEI Trades, a mod must:
 
