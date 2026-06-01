@@ -4,7 +4,9 @@
   "package": "de.larsensmods.jeitrades.mixin",
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "VillagerTradeAccessor"
+  ],
   "client": [],
   "server": [],
   "injectors": {

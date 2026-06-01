@@ -16,6 +16,12 @@
     "entrypoints": {
         "main": [
           "de.larsensmods.jeitrades.JEITradesModFabric"
+        ],
+        "client": [
+          "de.larsensmods.jeitrades.client.JEITradesModFabricClient"
+        ],
+        "jei_mod_plugin": [
+            "de.larsensmods.jeitrades.jei.JEITradesPlugin"
         ]
     },
     "mixins": [
