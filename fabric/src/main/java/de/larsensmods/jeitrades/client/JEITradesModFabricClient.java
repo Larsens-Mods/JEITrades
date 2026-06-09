@@ -1,6 +1,7 @@
 package de.larsensmods.jeitrades.client;
 
 import de.larsensmods.jeitrades.JEITradesMod;
+import de.larsensmods.jeitrades.data.BarteringData;
 import de.larsensmods.jeitrades.data.ClientDataStore;
 import de.larsensmods.jeitrades.data.VillagerTradeData;
 import de.larsensmods.jeitrades.networking.Channels;
@@ -17,6 +18,11 @@ public final class JEITradesModFabricClient implements ClientModInitializer {
         ClientLoginNetworking.registerGlobalReceiver(Channels.VILLAGER_TRADE_SYNC, (_, _, buf, _) -> {
             JEITradesMod.LOG.info("Received villager trade sync packet");
             ClientDataStore.VILLAGER_TRADE_DATA = VillagerTradeData.readFrom(buf);
+            return CompletableFuture.completedFuture(FriendlyByteBufs.empty());
+        });
+        ClientLoginNetworking.registerGlobalReceiver(Channels.BARTERING_SYNC, (_, _, buf, _) -> {
+            JEITradesMod.LOG.info("Received Bartering Sync packet");
+            ClientDataStore.BARTERING_DATA = BarteringData.readFrom(buf);
             return CompletableFuture.completedFuture(FriendlyByteBufs.empty());
         });
     }

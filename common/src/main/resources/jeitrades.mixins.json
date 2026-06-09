@@ -5,6 +5,13 @@
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "EnchantRandomlyFunctionAcessor",
+    "LootItemAccessor",
+    "LootPoolAccessor",
+    "LootPoolSingletonContainerAccessor",
+    "LootTableAccessor",
+    "SetItemCountFunctionAccessor",
+    "SetPotionFunctionAccessor",
     "VillagerTradeAccessor"
   ],
   "client": [],

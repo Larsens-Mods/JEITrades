@@ -4,5 +4,9 @@
   "jeitrades.villager.level_2": "II",
   "jeitrades.villager.level_3": "III",
   "jeitrades.villager.level_4": "IV",
-  "jeitrades.villager.level_5": "V"
+  "jeitrades.villager.level_5": "V",
+
+  "jeitrades.bartering.title": "Piglin Bartering",
+  "jeitrades.bartering.count_range": "%s to %s Items",
+  "jeitrades.bartering.count": "%s Items"
 }

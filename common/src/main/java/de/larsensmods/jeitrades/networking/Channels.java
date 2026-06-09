@@ -7,5 +7,6 @@ public class Channels {
 
     public static final String PROTOCOL_VERSION = "1";
     public static final Identifier VILLAGER_TRADE_SYNC = Identifier.fromNamespaceAndPath(JEITradesMod.MOD_ID, "villager_trade_sync");
+    public static final Identifier BARTERING_SYNC = Identifier.fromNamespaceAndPath(JEITradesMod.MOD_ID, "bartering_sync");
 
 }

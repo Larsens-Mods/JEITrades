@@ -1,6 +1,7 @@
 package de.larsensmods.jeitrades.jei;
 
 import de.larsensmods.jeitrades.JEITradesMod;
+import de.larsensmods.jeitrades.data.BarteringData;
 import de.larsensmods.jeitrades.data.ClientDataStore;
 import de.larsensmods.jeitrades.data.VillagerTradeData;
 import mezz.jei.api.IModPlugin;
@@ -26,20 +27,28 @@ public class JEITradesPlugin implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new VillagerTradesCategory(registration.getJeiHelpers()));
+        registration.addRecipeCategories(new BarteringCategory(registration.getJeiHelpers()));
     }
 
     @Override
     public void registerRecipes(@NonNull IRecipeRegistration registration) {
-        //ClientEvents.playerJoinedWorld(Minecraft.getInstance().player);
         JEITradesMod.LOG.info("Registering trades recipes");
-        VillagerTradeData data = ClientDataStore.VILLAGER_TRADE_DATA;
-        if(data != null) {
-            JEITradesMod.LOG.info("Trades data has been registered: {}", data.villagerProfessions().size());
+
+        VillagerTradeData villagerTradeData = ClientDataStore.VILLAGER_TRADE_DATA;
+        if(villagerTradeData != null) {
+            JEITradesMod.LOG.info("Trades data has been registered: {}", villagerTradeData.villagerProfessions().size());
         }else{
             JEITradesMod.LOG.warn("Trades data has not been registered");
         }
+        registration.addRecipes(VillagerTradeTypeHelper.RECIPE_TYPE, VillagerTradeTypeHelper.buildRecipes(villagerTradeData));
 
-        registration.addRecipes(VillagerTradeTypeHelper.RECIPE_TYPE, VillagerTradeTypeHelper.buildRecipes(data));
+        BarteringData barteringData = ClientDataStore.BARTERING_DATA;
+        if(barteringData != null) {
+            JEITradesMod.LOG.info("Bartering data has been registered: {}", barteringData.entries().size());
+        }else{
+            JEITradesMod.LOG.warn("Bartering data has not been registered");
+        }
+        registration.addRecipes(BarteringTypeHelper.RECIPE_TYPE, BarteringTypeHelper.buildRecipes(barteringData));
     }
 
     @Override

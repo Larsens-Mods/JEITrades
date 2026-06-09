@@ -1,10 +1,7 @@
 package de.larsensmods.jeitrades;
 
 import de.larsensmods.jeitrades.data.ClientDataStore;
-import de.larsensmods.jeitrades.networking.Channels;
-import de.larsensmods.jeitrades.networking.ServerNetworkHandler;
-import de.larsensmods.jeitrades.networking.VillagerTradesPayload;
-import de.larsensmods.jeitrades.networking.VillagerTradesTask;
+import de.larsensmods.jeitrades.networking.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -50,8 +47,16 @@ public class JEITradesModNeoForge {
                     VillagerTradesPayload.TYPE,
                     VillagerTradesPayload.STREAM_CODEC,
                     (payload, context) -> {
-                        JEITradesMod.LOG.info("Received data sync packet");
+                        JEITradesMod.LOG.info("Received trade data sync packet");
                         ClientDataStore.VILLAGER_TRADE_DATA = payload.data();
+                    }
+            );
+            registrar.configurationToClient(
+                    BarteringPayload.TYPE,
+                    BarteringPayload.STREAM_CODEC,
+                    (payload, context) -> {
+                        JEITradesMod.LOG.info("Received bartering data sync packet");
+                        ClientDataStore.BARTERING_DATA = payload.data();
                     }
             );
         }
@@ -60,6 +65,9 @@ public class JEITradesModNeoForge {
         public static void onConfigurationTaskRegister(RegisterConfigurationTasksEvent event){
             if(event.getListener().hasChannel(VillagerTradesPayload.TYPE)) {
                 event.register(new VillagerTradesTask(networkHandler, event.getListener()));
+            }
+            if(event.getListener().hasChannel(BarteringPayload.TYPE)) {
+                event.register(new BarteringTask(networkHandler, event.getListener()));
             }
         }
     }
