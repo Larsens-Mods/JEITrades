@@ -38,3 +38,10 @@ type = "optional"
 versionRange = "[${jei_version},)"
 ordering = "NONE"
 side = "CLIENT"
+
+[[dependencies.${mod_id}]]
+modId = "roughlyenoughitems"
+type = "optional"
+versionRange = "[${rei_version},)"
+ordering = "NONE"
+side = "CLIENT"

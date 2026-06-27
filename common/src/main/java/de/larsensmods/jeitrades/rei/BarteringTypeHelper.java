@@ -1,35 +1,36 @@
-package de.larsensmods.jeitrades.jei;
+package de.larsensmods.jeitrades.rei;
 
-import de.larsensmods.jeitrades.JEITradesMod;
 import de.larsensmods.jeitrades.data.BarteringData;
-import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
-import mezz.jei.api.recipe.types.IRecipeType;
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.display.Display;
+import me.shedaniel.rei.api.common.display.DisplaySerializer;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.util.ARGB;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.enchantment.Enchantment;
+import org.jetbrains.annotations.Nullable;
 
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-public class BarteringTypeHelper implements IRecipeCategoryExtension<BarteringTypeHelper> {
-
-    public static final IRecipeType<BarteringTypeHelper> RECIPE_TYPE = IRecipeType.create(Identifier.fromNamespaceAndPath(JEITradesMod.MOD_ID, "bartering"), BarteringTypeHelper.class);
+public class BarteringTypeHelper implements Display {
 
     public static int totalWeight = 0;
 
     public static List<BarteringTypeHelper> buildRecipes(BarteringData data) {
         if(data == null){
-            JEITradesMod.LOG.warn("No Bartering data present, skipping...");
             return List.of();
         }
         List<BarteringTypeHelper> recipes = new ArrayList<>();
@@ -80,21 +81,34 @@ public class BarteringTypeHelper implements IRecipeCategoryExtension<BarteringTy
         return outputs;
     }
 
-    @Override
-    public void drawInfo(BarteringTypeHelper recipe, int recipeWidth, int recipeHeight, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
-        int textX = 35, textY = 13;
-
-        guiGraphics.pose().pushMatrix();
-        guiGraphics.pose().translate(textX, textY);
-        guiGraphics.pose().scale(1f, 1f);
-        guiGraphics.text(Minecraft.getInstance().font, buildChanceText(), 0, 0, ARGB.opaque(8), false);
-        guiGraphics.pose().popMatrix();
-    }
-
-    private Component buildChanceText() {
+    public Component buildChanceText() {
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
         Component text = Component.literal(decimalFormat.format(((double) entry.weight() / totalWeight) * 100) + "%");
         return text;
     }
 
+    @Override
+    public List<EntryIngredient> getInputEntries() {
+        return List.of(EntryIngredients.of(Items.GOLD_INGOT));
+    }
+
+    @Override
+    public List<EntryIngredient> getOutputEntries() {
+        return getOutputs().stream().map(EntryIngredients::of).toList();
+    }
+
+    @Override
+    public CategoryIdentifier<?> getCategoryIdentifier() {
+        return BarteringCategory.BARTERING;
+    }
+
+    @Override
+    public Optional<Identifier> getDisplayLocation() {
+        return Optional.empty();
+    }
+
+    @Override
+    public @Nullable DisplaySerializer<? extends Display> getSerializer() {
+        return null;
+    }
 }

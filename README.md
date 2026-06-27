@@ -1,5 +1,5 @@
 # JEI Trades
-JEI Trades is an addon mod for Just Enough Items (JEI) that adds information on trades (e.g. villagers) to JEI.
+JEI Trades is an addon mod for Just Enough Items (JEI) and Roughly Enough Items (REI) that adds information on trades (e.g. villagers) to them.
 
 ## Download
 You can download JEI Trades from the following links:
@@ -10,12 +10,16 @@ On your client you need to additionally install Just Enough Items (JEI):
 - [Modrinth](https://modrinth.com/mod/jei)
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/jei)
 
+Or alternatively Roughly Enough Items (REI):
+- [Modrinth](https://modrinth.com/mod/rei)
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items)
+
 If you use the Fabric version of JEI Trades, you also need to install FabricAPI:
 - [Modrinth](https://modrinth.com/mod/fabric-api)
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
 
 ## How does it work?
-JEI Trades allows you to view trade information in JEI, including those of other mods.
+JEI Trades allows you to view trade information in JEI/REI, including those of other mods.
 It reads the information directly from the server, so it is based on the actual configuration used in the save.
 This makes the shown information very complete and JEI Trades able to show information for all mods that use the standard Minecraft trades system, without needing specific support for each mod.
 
