@@ -1,5 +1,7 @@
 package de.larsensmods.jeitrades;
 
+import de.larsensmods.jeitrades.cache.DataCache;
+import de.larsensmods.jeitrades.config.ConfigManager;
 import de.larsensmods.jeitrades.data.BarteringData;
 import de.larsensmods.jeitrades.data.VillagerTradeData;
 import de.larsensmods.jeitrades.data.transformed.TransformedTradeSet;
@@ -47,6 +49,10 @@ public class JEITradesMod {
     public static void init(INetworkHandler netHandler) {
         LOG.info("Initializing JEITradesMod");
         networkHandler = netHandler;
+
+        if(ConfigManager.getConfig().isCacheLastDataset()){
+            DataCache.loadIfAvailable();
+        }
     }
 
     public static void onWorldLoaded(MinecraftServer server) {
