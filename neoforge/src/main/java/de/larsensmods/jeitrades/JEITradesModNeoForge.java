@@ -48,7 +48,7 @@ public class JEITradesModNeoForge {
                     VillagerTradesPayload.STREAM_CODEC,
                     (payload, context) -> {
                         JEITradesMod.LOG.info("Received trade data sync packet");
-                        ClientDataStore.VILLAGER_TRADE_DATA = payload.data();
+                        ClientDataStore.storeVillagerTradeData(payload.data());
                     }
             );
             registrar.configurationToClient(
@@ -56,7 +56,7 @@ public class JEITradesModNeoForge {
                     BarteringPayload.STREAM_CODEC,
                     (payload, context) -> {
                         JEITradesMod.LOG.info("Received bartering data sync packet");
-                        ClientDataStore.BARTERING_DATA = payload.data();
+                        ClientDataStore.storeBarteringData(payload.data());
                     }
             );
         }
