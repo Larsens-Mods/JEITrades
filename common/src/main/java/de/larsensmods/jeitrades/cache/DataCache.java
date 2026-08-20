@@ -43,7 +43,7 @@ public class DataCache {
                 FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.copiedBuffer(bytes));
                 ClientDataStore.VILLAGER_TRADE_DATA = VillagerTradeData.readFrom(buf);
                 JEITradesMod.LOG.info("Read trades data from cache file.");
-            }catch (IOException e){
+            }catch (Exception e){
                 JEITradesMod.LOG.error("Unable to read from existing cache file.", e);
             }
         }
@@ -53,7 +53,7 @@ public class DataCache {
                 FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.copiedBuffer(bytes));
                 ClientDataStore.BARTERING_DATA = BarteringData.readFrom(buf);
                 JEITradesMod.LOG.info("Read bartering data from cache file.");
-            }catch (IOException e){
+            }catch (Exception e){
                 JEITradesMod.LOG.error("Unable to read from existing cache file.", e);
             }
         }
